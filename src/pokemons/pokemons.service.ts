@@ -20,7 +20,7 @@ export class PokemonsService {
     return {
       pokemons,
       total,
-      totalPage: Math.ceil(total / params.pageSize || 10),
+      totalPage: Math.ceil(total / take),
     };
   };
 }
