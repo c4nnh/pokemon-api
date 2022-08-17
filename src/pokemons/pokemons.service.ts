@@ -8,13 +8,25 @@ export class PokemonsService {
   constructor(private readonly prisma: PrismaService) {}
 
   get = async (params: PokemonParams): Promise<GetPokemonsResponse> => {
-    const take = params.pageSize || 10;
-    const skip = params.pageIndex ? (params.pageIndex - 1) * take : 0;
+    const take = params.limit || 10;
+    const skip = params.offset || 0;
+
     const [total, pokemons] = await this.prisma.$transaction([
-      this.prisma.pokemon.count(),
+      this.prisma.pokemon.count({
+        where: {
+          name: {
+            contains: params.name,
+          },
+        },
+      }),
       this.prisma.pokemon.findMany({
         skip,
         take,
+        where: {
+          name: {
+            contains: params.name,
+          },
+        },
       }),
     ]);
     return {
