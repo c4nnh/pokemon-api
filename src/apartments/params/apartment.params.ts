@@ -3,8 +3,8 @@ import { IsNumber, IsOptional, IsString, Min } from 'class-validator';
 export class ApartmentParams {
   @IsOptional()
   @IsNumber()
-  @Min(1)
-  pageNumber?: number = 1;
+  @Min(0)
+  pageNumber?: number = 0;
 
   @IsOptional()
   @IsNumber()
