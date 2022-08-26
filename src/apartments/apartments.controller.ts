@@ -5,7 +5,7 @@ import { CreateApartmentsDto } from './dto/create-apartments.dto';
 import { ApartmentParams } from './params/apartment.params';
 import { GetApartmentResponse } from './response/get-apartments.response';
 
-@Controller('apartments')
+@Controller('cms/v1/leasing/apartments')
 @ApiTags('Apartment')
 export class ApartmentsController {
   constructor(private readonly service: ApartmentsService) {}
