@@ -13,4 +13,12 @@ export class ApartmentParams {
   @IsOptional()
   @IsString()
   searchText?: string;
+
+  @IsOptional()
+  @IsString()
+  orderBy?: string;
+
+  @IsOptional()
+  @IsString()
+  orderByDirection?: string;
 }

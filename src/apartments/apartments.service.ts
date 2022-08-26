@@ -18,7 +18,13 @@ export class ApartmentsService {
   ) {}
 
   getMany = async (query: ApartmentParams): Promise<GetApartmentResponse> => {
-    const { searchText, pageNumber, pageSize: take } = query;
+    const {
+      searchText,
+      pageNumber,
+      pageSize: take,
+      orderBy,
+      orderByDirection,
+    } = query;
     const skip = pageNumber * take;
 
     const where = {
@@ -33,6 +39,9 @@ export class ApartmentsService {
         where,
         skip,
         take,
+        orderBy: {
+          [orderBy]: orderByDirection.toLowerCase(),
+        },
       }),
     ]);
 
