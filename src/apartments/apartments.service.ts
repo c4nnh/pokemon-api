@@ -22,7 +22,7 @@ export class ApartmentsService {
       searchText,
       pageNumber,
       pageSize: take,
-      orderBy,
+      orderBy: orderKey,
       orderByDirection,
     } = query;
     const skip = pageNumber * take;
@@ -33,15 +33,19 @@ export class ApartmentsService {
       },
     };
 
+    const orderBy = orderKey
+      ? {
+          [orderKey]: orderByDirection.toLowerCase(),
+        }
+      : {};
+
     const [total, apartments] = await this.prisma.$transaction([
       this.prisma.apartment.count({ where }),
       this.prisma.apartment.findMany({
         where,
         skip,
         take,
-        orderBy: {
-          [orderBy]: orderByDirection.toLowerCase(),
-        },
+        orderBy,
       }),
     ]);
 
